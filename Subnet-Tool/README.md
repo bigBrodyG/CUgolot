@@ -19,7 +19,7 @@ L'aspetto riprende colori e struttura di Moodle: box azzurro per quello che scri
 
 ## Uso rapido
 
-- **Teoria**: scrivi e premi `Invio` per copiare la risposta. Dalla sigla copia il significato, dal significato (o da parole della definizione) copia la sigla o il termine. `↑` `↓` scelgono un altro risultato, `Maiusc`+`Invio` copia l'altro campo, `Esc` svuota. Nella teoria basta iniziare a scrivere.
+- **Teoria**: scrivi e premi `Invio` per copiare la risposta. Dalla sigla o dal termine copia il significato o la definizione, da parole della definizione copia la sigla o il termine. `↑` `↓` scelgono un altro risultato, `Maiusc`+`Invio` copia l'altro campo, `Esc` svuota. Nella teoria basta iniziare a scrivere.
 - **Clic su un valore** (IP, mask, numeri, binario) per copiarlo. I numeri si copiano senza separatori: nel quiz `4.094` verrebbe letto come 4,094.
 - **Incolla la domanda** nel primo campo di Indirizzi, Classe, Subnet, CIDR o Routing, o nel classificatore: IP, mask, gateway e destinazione vengono estratti da soli.
 - `1`–`8` cambiano strumento e mettono il cursore nel primo campo, `Esc` esce dal campo, `/` apre la teoria, `T` cambia tema.

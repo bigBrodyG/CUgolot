@@ -819,7 +819,7 @@
         <div class="qinfo"><span class="qno">Strumento <b>8</b></span><span>Teoria</span><span class="qk">Tasto <kbd>8</kbd> o <kbd>/</kbd></span></div>
         <div class="formulation">
           <h2>Teoria del livello 3</h2>
-          <p class="lede">Scrivi una sigla, un termine o qualche parola della definizione. Invio copia la risposta: la sigla dà il significato, il significato dà la sigla.</p>
+          <p class="lede">Scrivi una sigla, un termine o qualche parola della definizione. Invio copia l'altro lato: dalla sigla o dal termine la definizione, dalla definizione la sigla o il termine.</p>
         </div>
       </div>
       <div class="sticky-search nocp">
@@ -2235,8 +2235,8 @@ function renderStatic() {
 
 /* ================= 8. Teoria ================= */
 // Ogni voce: [termine, significato o definizione, nota, alias di ricerca].
-// Sezioni "bidirezionali" (true): cercando il termine si copia il significato e viceversa.
-// Nelle altre si copia sempre il termine, cioè la risposta breve.
+// Invio copia sempre l'altro lato di ciò che hai cercato: dal termine (o dalla sigla) la definizione,
+// da parole della definizione il termine. Il flag di sezione resta per eventuali voci a senso unico.
 const REF_DATA = [
   ['Sigle', true, [
     ['ES', 'End System', 'Host: stazione di partenza o di arrivo dei pacchetti'],
@@ -2275,7 +2275,7 @@ const REF_DATA = [
     ['NAT', 'Network Address Translation', 'Traduce gli IP privati in pubblici (fuori dal libro)'],
     ['RIP', 'Routing Information Protocol', 'Distance vector (fuori dal libro)'],
   ]],
-  ['Termini', false, [
+  ['Termini', true, [
     ['hostname', 'Stringa alfanumerica di facile memorizzazione associata a un indirizzo IP', 'Si definisce nel file hosts o, sulle reti grandi, con il DNS', ['nome host']],
     ['hosts', 'File locale del sistema operativo che associa i nomi degli host ai rispettivi indirizzi IP', '/etc/hosts; impraticabile quando la rete cresce, si passa al DNS', ['file hosts', '/etc/hosts']],
     ['localhost', 'Nome del classico indirizzo di loopback 127.0.0.1', 'Notazione speciale {127, any}'],
@@ -2351,7 +2351,7 @@ const REF_DATA = [
     ['RFC 1878', 'Subnet zero e all-ones utilizzabili', 'Fuori dal libro'],
     ['RFC 3021', '/31 sui link punto-punto', 'Fuori dal libro'],
   ]],
-  ['Enti', false, [
+  ['Enti', true, [
     ['ICANN', 'Autorità che gestisce l\'assegnazione degli indirizzi IP su Internet', 'Catena: ICANN → IANA → RIR (RIPE) → LIR e ISP → utenti'],
     ['IANA', 'Opera per conto dell\'ICANN, sotto le direttive della RFC 2050', ''],
     ['RIR', 'Nome generico delle agenzie continentali', ''],
@@ -2362,7 +2362,7 @@ const REF_DATA = [
     ['IEEE', 'Standard delle LAN, per esempio i bridge 802.1D: non gestisce gli IP (intruso tipico)', ''],
     ['ISO', 'Modello OSI: non gestisce gli IP (intruso tipico)', ''],
   ]],
-  ['Classi e indirizzi', false, [
+  ['Classi e indirizzi', true, [
     ['Classe A', 'Leading bit 0 · primo ottetto 0–127 · /8 255.0.0.0 · 7 bit di netId (128 reti) · 24 bit di hostId (16777216 indirizzi)', ''],
     ['Classe B', 'Leading bit 10 · 128–191 · /16 255.255.0.0 · 14 bit di netId (16384 reti) · 16 bit di hostId (65536 indirizzi)', ''],
     ['Classe C', 'Leading bit 110 · 192–223 · /24 255.255.255.0 · 21 bit di netId (2097152 reti) · 8 bit di hostId (256 indirizzi)', ''],
@@ -2399,7 +2399,7 @@ const REF_DATA = [
     ['{netId, subnetId, 0}', 'Specified subnet', 'Non utilizzabile come indirizzo IP'],
     ['classe D', 'Multicast group address', 'Non è in RFC 1009 (è RFC 1112): l\'intruso tipico; solo come destinazione'],
   ]],
-  ['Algoritmi', false, [
+  ['Algoritmi', true, [
     ['FDR', 'Non adattativo: TdI scritta manualmente dall\'amministratore con regole Indirizzo/Porta (route statiche)', 'A volte più linee per un destinatario in caso di guasto; il sysadmin ha il totale controllo dei flussi e modifica le TdI in caso di guasti'],
     ['Flooding', 'Non adattativo: ritrasmette ogni pacchetto su tutte le linee tranne quella da cui è arrivato', 'Garantito convergente, proposto in campo militare; sulle maglie genera loop (servono age counter); non ottimizza le linee, usato quasi solo come supporto; il pacchetto arriva sempre, a prescindere dal prezzo pagato dalla rete'],
     ['Routing centralizzato', 'Adattativo: un IS speciale (RCC) raccoglie lo stato della rete, calcola e distribuisce le TdI a tutti i router', 'Ottimizza le prestazioni ma è poco robusto: se il nodo di controllo si guasta l\'intera rete collassa; richiede una stazione molto potente in prestazioni e connessioni'],
@@ -2410,7 +2410,7 @@ const REF_DATA = [
     ['Router, indirizzi L3, TdI, algoritmo di instradamento', 'Elementi base dei protocolli di livello 3 Rete', 'Il MAC delle schede di rete non ne fa parte'],
     ['TdI ideale', 'Una riga per ogni host, aggiornata immediatamente su tutti i nodi a ogni cambio di topologia: irrealizzabile sulle maglie', ''],
   ]],
-  ['CNLS e CONS', false, [
+  ['CNLS e CONS', true, [
     ['CNLS', 'Ogni pacchetto contiene gli indirizzi L3 di mittente e destinatario', ''],
     ['CNLS', 'Pacchetti dello stesso flusso possono seguire cammini diversi', ''],
     ['CNLS', 'Sono possibili pacchetti duplicati o in ritardo rispetto all\'ordine di trasmissione', ''],
@@ -2426,7 +2426,7 @@ const REF_DATA = [
     ['CONS', 'Dopo l\'apertura della connessione i pacchetti contengono solo la label', 'Operazione eseguibile in hardware; la look-up table ha tante righe quanti circuiti virtuali attivi'],
     ['3-6-5-6-8', 'Sequenza delle label del circuito virtuale da A a M nell\'esempio del libro', 'S1 esce P2 L=6, S2 P2 L=5, S3 P3 L=6, S4 P2 L=8; il circuito L=7 su S2 esce da P3 con L=1'],
   ]],
-  ['TdI e comandi', false, [
+  ['TdI e comandi', true, [
     ['route print', 'Visualizza la TdI su Windows', ''],
     ['route print > tdi.txt', 'Salva la TdI su file (Windows)', ''],
     ['route -n', 'Visualizza la TdI su Linux in formato numerico', 'Colonne Destination, Gateway, Genmask, Flags, Metric, Ref, Use, Iface'],
@@ -2441,7 +2441,7 @@ const REF_DATA = [
     ['hops = 0', 'Nel programma del libro: destinazione raggiunta, host direttamente connesso al router', 'Sentinella h = −1 per prevenire loop ed errori'],
     ['Errore TTL', 'Il programma «Hops» con input illecito (da R1 a R9) cerca il percorso indefinitamente', 'In IP lo gestisce il campo TTL'],
   ]],
-  ['Formule', false, [
+  ['Formule', true, [
     ['2^h − 2', 'Host assegnabili per subnet, con h = bit di hostId = 32 − prefisso', 'Nome e broadcast non sono assegnabili'],
     ['2^s', 'Numero di subnet con s bit di subnetId', 'Classful senza subnet zero e all-ones: 2^s − 2'],
     ['2^(24 − p)', 'Reti di classe C aggregate da un blocco /p', '4 reti C → /22; 8 reti C → /21'],
@@ -2474,7 +2474,7 @@ const REF_DATA = [
     ['Supernet 192.192.0.x ÷ 192.192.3.x', '192.192.0.0/22', '4 reti di classe C'],
     ['A1 → 196.13.2.5', 'Consegna indiretta', 'A1 196.13.1.1/24, gateway 196.13.1.254: trama al MAC del gateway'],
   ]],
-  ['Trappole', false, [
+  ['Trappole', true, [
     ['Classe B: 10', 'Il libro a pag. 124 scrive leading bit «01»: è un refuso, sono 10', 'A pag. 125 è corretto'],
     ['.1 ÷ .62', 'Host della subnet A 192.168.0.0/26: il libro scrive .1 ÷ .64, ma .63 è il broadcast', ''],
     ['metrica più bassa', 'A parità di mask il libro dice «metrica più alta»; nei sistemi reali vince la più bassa', ''],
@@ -2485,7 +2485,7 @@ const REF_DATA = [
     ['255.255.255.0', 'È la netmask di classe C, anche se come indirizzo sarebbe classe E', ''],
     ['Numeri senza punto', 'Nel quiz scrivi 4094, non 4.094: il punto viene letto come virgola', ''],
   ]],
-  ['Date', false, [
+  ['Date', true, [
     ['29 ottobre 1969', 'Primo collegamento (Kleinrock, router IMP): a Stanford arriva «lo» invece di «login»', ''],
     ['1993', 'CIDR (RFC 1519, IETF): lo schema classful decade ufficialmente', ''],
     ['2010', 'Ultima assegnazione di una rete di classe A', ''],
@@ -2535,12 +2535,15 @@ function refSearch(q) {
     if (e.sk === qs || e.as.includes(qs)) { sc += 1000; onK = true; }
     else if (e.sk.startsWith(qs) || e.as.some(a => a.startsWith(qs))) { sc += 600; onK = true; }
     else if (words.every(w => e.nk.includes(w))) { sc += 400; onK = true; }
-    if (e.sv === qs) sc += 900;
-    else if (e.nv.startsWith(qn)) sc += 300;
-    else if (words.every(w => e.nv.includes(w))) sc += 200;
-    else if (words.every(w => (e.nv + ' ' + e.nn).includes(w))) sc += 100;
-    // parole intere nel significato valgono di più: "subnet" preferisce "specified subnet" a "all subnets"
-    sc += words.filter(w => new RegExp(`(^|[^a-z0-9])${w.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}($|[^a-z0-9])`).test(e.nv)).length * 25;
+    // se hai scritto il termine conta solo quello: a parità vince la sezione che viene prima (Sigle prima di Enti)
+    if (!onK) {
+      if (e.sv === qs) sc += 900;
+      else if (e.nv.startsWith(qn)) sc += 300;
+      else if (words.every(w => e.nv.includes(w))) sc += 200;
+      else if (words.every(w => (e.nv + ' ' + e.nn).includes(w))) sc += 100;
+      // parole intere nel significato valgono di più: "subnet" preferisce "specified subnet" a "all subnets"
+      sc += words.filter(w => new RegExp(`(^|[^a-z0-9])${w.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}($|[^a-z0-9])`).test(e.nv)).length * 25;
+    }
     const side = e.x && onK ? 'v' : 'k';
     if (sq(side === 'v' ? e.v : e.k) === qs) sc -= 700;   // copiare ciò che hai appena scritto non serve
     sc -= Math.min(e.k.length, 60) * 0.3;
