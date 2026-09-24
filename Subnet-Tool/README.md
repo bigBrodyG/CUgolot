@@ -2,7 +2,7 @@
 
 Calcolatore IPv4 e routing di livello 3 in un unico file HTML. Funziona offline: nessuna libreria esterna, nessuna richiesta di rete (solo il font monospace è incorporato). Si apre con un doppio clic su `subnet-tool.html`.
 
-L'aspetto riprende colori e struttura di Moodle: box azzurro per quello che scrivi, box pesca per le risposte, tabelle riepilogo con le etichette in grigio, pannello "Navigazione" a destra con gli 8 strumenti.
+L'aspetto segue il design system della piattaforma Moodle: navbar, box info a sinistra ("Strumento N"), formulation azzurra per quello che scrivi, box pesca (outcome) per le risposte, tabelle riepilogo con le etichette in grigio, blocco "Navigazione" a destra con i pulsanti a semaforo, link freccia tra gli strumenti e pulsante primario arancione. Il semaforo dice lo stato di ogni strumento: verde pronto, rosso se un campo non è valido, giallo con un avviso, grigio per la teoria. I campi mostrano ✓ o ✗ come i form-control validati. Tema chiaro predefinito, scuro opzionale.
 
 ## Gli 8 strumenti
 
